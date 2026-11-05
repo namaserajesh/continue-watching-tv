@@ -1,0 +1,9 @@
+* text=auto
+gradlew text eol=lf
+*.bat text eol=crlf
+*.jar binary
+
+.gitattributes export-ignore
+.gitignore export-ignore
+CONTRIBUTING.md export-ignore
+SECURITY.md export-ignore

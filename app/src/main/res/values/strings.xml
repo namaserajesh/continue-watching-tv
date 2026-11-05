@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Continue Watching</string>
+    <string name="empty">Nothing here yet. Play something for a minute and it will appear.</string>
+    <string name="no_access">Now-playing history is off: notification access is not granted.</string>
+    <string name="progress">%1$d of %2$d min</string>
+</resources>

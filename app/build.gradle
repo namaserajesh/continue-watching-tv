@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Optional: `neverListed=pkg.one,pkg.two` in local.properties keeps those apps out of the list
+// and out of the history. local.properties is never committed, so the choice stays on your machine.
+def localProperties = new Properties()
+def localFile = rootProject.file('local.properties')
+if (localFile.exists()) localFile.withInputStream { localProperties.load(it) }
+def neverListed = localProperties.getProperty('neverListed', '').trim()
+
+android {
+    namespace 'local.continuewatching'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'local.continuewatching'
+        minSdk 26
+        targetSdk 34
+        versionCode 1
+        versionName '0.1.0'
+        buildConfigField 'String', 'NEVER_LISTED', "\"${neverListed}\""
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    buildTypes {
+        release {
+            // Sideloaded over ADB, not sold in any store: signed with the debug key, like the launcher.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}

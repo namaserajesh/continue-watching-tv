@@ -1,0 +1,12 @@
+# Machine-local: SDK path and the optional neverListed list.
+local.properties
+
+.gradle/
+build/
+.idea/
+*.iml
+.DS_Store
+*.apk
+*.aab
+*.keystore
+*.jks
