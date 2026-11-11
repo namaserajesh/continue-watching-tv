@@ -59,6 +59,25 @@ with the same component, then `allow_listener` again: the listener can stay allo
 
 Turn network debugging off when you are done.
 
+## Check the signature
+
+Every release APK on the Releases page is signed with the same certificate. Before installing a
+download or an update, compare its certificate with this one (`apksigner` ships in the Android SDK's
+build-tools):
+
+```sh
+apksigner verify --print-certs continue-watching-v0.1.0.apk
+```
+
+```text
+Signer #1 certificate DN: C=US, O=Android, CN=Android Debug
+Signer #1 certificate SHA-256 digest: 23784ccc26483560e91f114946defb0f2a00f2f2fe1175b0919bdfd596657abe
+```
+
+If the SHA-256 differs, the APK did not come from this repository's releases: don't install it, and
+open an issue. The DN is the generic one every Android debug key carries, so only the digest
+identifies this key.
+
 ## Permissions
 
 | Permission | Why |
@@ -92,8 +111,8 @@ echo "sdk.dir=/path/to/android-sdk" > local.properties
 ```
 
 The release build is signed with the local debug key, as most sideloaded TV apps are. An APK you build
-yourself therefore has a different certificate than the one on the Releases page; uninstall one before
-installing the other.
+yourself therefore has a different certificate than the one on the Releases page (see
+[Check the signature](#check-the-signature)); uninstall one before installing the other.
 
 ## With CleanYourTV
 
